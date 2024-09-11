@@ -1,0 +1,19 @@
+server:
+  shutdown: graceful
+  tomcat:
+    accesslog:
+      enabled: true
+      directory: /log
+      file-date-format: yy-MM-dd
+      pattern: '%h %l %u [%{yy-MM-dd:HH:mm:ss}t] "%r" %s %b %D %{User-Agent}i'
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 3m
+  redis:
+    sentinel:
+      master: master  # Sentinel에서 모니터링하는 마스터의 이름
+      nodes: # Sentinel 서버 목록
+        - nuxx-rds-0.nuxx-rds:26379
+        - nuxx-rds-1.nuxx-rds:26379
+        - nuxx-rds-2.nuxx-rds:26379
